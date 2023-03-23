@@ -13,7 +13,7 @@ public class UserService
 
     private User[] Users { get; set; }
     
-    public User? GetUser(int id) => Users.FirstOrDefault(o => o.Id == id);
+    public async Task<User?> GetUser(int id) => Users.FirstOrDefault(o => o.Id == id);
     
-    public IEnumerable<User> GetUsers(int page, int size) => Users.Skip(page * size).Take(size);
+    public async Task<IEnumerable<User>> GetUsers(int page, int size) => Users.Skip(page * size).Take(size);
 }

@@ -18,9 +18,14 @@ app.UseEndpoints(
     o =>
     {
         o.MapSwagger();
-        o.MapGet("/users", (int page, int size, UserService service) => service.GetUsers(page, size));
-        o.MapGet("/users/{id}", (int id, UserService service) => service.GetUser(id));
-        o.MapGet("/users/{id}/roles", (int id, RoleService service) => service.GetRolesByUserId(new[] { id }));
+        o.MapGet("/users", 
+            async (int page, int size, UserService service) => await service.GetUsers(page, size));
+        
+        o.MapGet("/users/{id}",
+            async (int id, UserService service) => await service.GetUser(id));
+        
+        o.MapGet("/users/{id}/roles",
+            async (int id, RoleService service) => await service.GetRolesByUserId(new[] { id }));
     });
 
 app.Run();
