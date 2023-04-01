@@ -17,12 +17,12 @@ public class RoleService
     }
 
     private Role[] Roles { get; }
-    
+
     public async Task<Role?> GetRole(int id) => Roles.FirstOrDefault(o => o.Id == id);
-    
+
     public async Task<IEnumerable<Role>> GetRoles() => Roles;
-    
-    public async Task<IReadOnlyDictionary<int, Role[]>> GetRolesByUserId(int[] ids)
+
+    public async Task<IReadOnlyDictionary<int, Role[]>> GetRolesByUserId(IReadOnlyList<int> ids)
     {
         var result = new Dictionary<int, Role[]>();
         foreach (var id in ids)
@@ -31,10 +31,10 @@ public class RoleService
             var roles = Roles
                 .Where(o => random.Next(0, 2) == 1)
                 .ToArray();
-            
+
             result.Add(id, roles);
         }
-        
+
         return result;
     }
 }
