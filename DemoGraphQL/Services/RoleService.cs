@@ -18,12 +18,21 @@ public class RoleService
 
     private Role[] Roles { get; }
 
-    public async Task<Role?> GetRole(int id) => Roles.FirstOrDefault(o => o.Id == id);
+    public async Task<Role?> GetRole(int id)
+    {
+        Console.WriteLine($"GetRole({id})");
+        return Roles.FirstOrDefault(o => o.Id == id);
+    }
 
-    public async Task<IEnumerable<Role>> GetRoles() => Roles;
+    public async Task<IEnumerable<Role>> GetRoles()
+    {
+        Console.WriteLine($"GetRoles()");
+        return Roles;
+    }
 
     public async Task<IReadOnlyDictionary<int, Role[]>> GetRolesByUserId(IReadOnlyList<int> ids)
     {
+        Console.WriteLine($"GetRolesByUserId({string.Join(", ", ids)})");
         var result = new Dictionary<int, Role[]>();
         foreach (var id in ids)
         {

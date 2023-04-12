@@ -1,4 +1,5 @@
 using DemoGraphQL.Services;
+using DemoGraphQL.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,9 @@ app.UseEndpoints(
         
         o.MapGet("/users/{id}/roles",
             async (int id, RoleService service) => await service.GetRolesByUserId(new[] { id }));
+        
+        o.MapPost("/users", 
+            async (UserCreationRequest request, UserService service) => await service.CreateUser(request.Name, request.Name));
     });
 
 app.Run();
