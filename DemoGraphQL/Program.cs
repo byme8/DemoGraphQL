@@ -1,9 +1,17 @@
 using DemoGraphQL.Services;
 using DemoGraphQL.Users;
+using HotChocolate.Resolvers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
+
+services
+    .AddGraphQLServer()
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>()
+    .AddTypeExtension<UserQueryExtensions>()
+    .AddTypeExtension<UserRolesQueryExtensions>();
 
 services.AddSingleton<UserService>();
 services.AddSingleton<RoleService>();
@@ -18,6 +26,7 @@ app.UseRouting();
 app.UseEndpoints(
     o =>
     {
+        o.MapGraphQL();
         o.MapSwagger();
         o.MapGet("/users", 
             async (int page, int size, UserService service) => await service.GetUsers(page, size));
@@ -33,3 +42,40 @@ app.UseEndpoints(
     });
 
 app.Run();
+
+public class Mutation
+{
+    public Task<User> CreateUser(string name, string email, [Service] UserService userService)
+        => userService.CreateUser(name, email);
+}
+
+public class Query
+{
+    public DateTimeOffset Utc() => DateTimeOffset.UtcNow;
+
+   
+}
+
+[ExtendObjectType(typeof(Query))]
+public class UserQueryExtensions
+{
+    public Task<IEnumerable<User>> GetUsers(int page, int size, [Service] UserService userService)
+        => userService.GetUsers(page, size);
+    
+    public Task<User?> GetUser(int id, [Service] UserService userService)
+    => userService.GetUser(id);
+}
+
+[ExtendObjectType(typeof(User))]
+public class UserRolesQueryExtensions
+{
+    public async Task<Role[]> GetRoles(
+        IResolverContext context,
+        [Parent] User user, [Service] RoleService roleService)
+    {
+        var a = context.Selection;
+        return await context.BatchDataLoader<int, Role[]>(async (ids, ct)
+            => await roleService.GetRolesByUserId(ids))
+            .LoadAsync(user.Id);
+    }
+}
