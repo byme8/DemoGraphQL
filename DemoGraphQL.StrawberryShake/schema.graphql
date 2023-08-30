@@ -1,0 +1,25 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  users(page: Int! size: Int!): [User!]!
+  user(id: Int!): User
+}
+
+type Mutation {
+  createUser(name: String! email: String!): User!
+}
+
+type Role {
+  id: Int!
+  name: String!
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  roles: [Role!]!
+}

@@ -1,0 +1,8 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ec7dd8a1_002D5a6b_002D4f59_002Da64c_002D34e9f98d3b1c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetUsers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::B8D3CD10-6A92-46C8-8CDF-B914AA526776::net7.0::DemoGraphQL.Tests.UsersTests.GetUsers&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B8D3CD10-6A92-46C8-8CDF-B914AA526776::net7.0::DemoGraphQL.Tests.UsersTests.GetUser&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B8D3CD10-6A92-46C8-8CDF-B914AA526776::net7.0::DemoGraphQL.Tests.UsersTests.GetUsersGraphql&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
